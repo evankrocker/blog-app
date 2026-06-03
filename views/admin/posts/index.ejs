@@ -1,0 +1,83 @@
+<div class="admin-card">
+  <% if (posts.length === 0) { %>
+    <div class="text-center py-5">
+      <div style="font-size:3rem">📝</div>
+      <h5 class="mt-3 fw-bold">No posts yet</h5>
+      <p class="text-muted">Create your first blog post to get started.</p>
+      <a href="/admin/posts/new" class="btn btn-primary">
+        <i class="bi bi-plus-lg me-2"></i>New Post
+      </a>
+    </div>
+  <% } else { %>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th style="width:40%">Title</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Slug</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% posts.forEach(post => { %>
+        <tr>
+          <td>
+            <div class="fw-semibold"><%= post.title %></div>
+            <div class="text-muted small text-truncate" style="max-width:300px"><%= post.excerpt %></div>
+          </td>
+          <td>
+            <span class="badge bg-light text-dark border"><%= post.categoryLabel %></span>
+          </td>
+          <td class="text-muted small"><%= post.date %></td>
+          <td class="text-muted small font-monospace"><%= post.slug %></td>
+          <td class="text-end">
+            <div class="d-flex gap-1 justify-content-end">
+              <a href="/post/<%= post.slug %>" target="_blank" class="btn btn-sm btn-outline-secondary" title="View">
+                <i class="bi bi-eye"></i>
+              </a>
+              <a href="/admin/posts/<%= post.id %>/edit" class="btn btn-sm btn-outline-primary" title="Edit">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <button type="button" class="btn btn-sm btn-outline-danger" title="Delete"
+                      onclick="confirmDelete(<%= post.id %>, '<%= post.title.replace(/'/g, "\\'") %>')">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-3 small text-muted"><%= posts.length %> post<%= posts.length !== 1 ? 's' : '' %> total</div>
+  <% } %>
+</div>
+
+<script>
+function confirmDelete(id, title) {
+  document.getElementById('deleteModalTitle').textContent = '"' + title + '"';
+  document.getElementById('deleteForm').action = '/admin/posts/' + id + '/delete';
+  new bootstrap.Modal(document.getElementById('deleteModal')).show();
+}
+</script>
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center p-4">
+        <div style="font-size:2.5rem">🗑️</div>
+        <h6 class="fw-bold mt-2">Delete Post?</h6>
+        <p class="text-muted small mb-3" id="deleteModalTitle"></p>
+        <div class="d-grid gap-2">
+          <form id="deleteForm" method="POST">
+            <button type="submit" class="btn btn-danger w-100">Yes, delete it</button>
+          </form>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

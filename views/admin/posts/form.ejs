@@ -1,0 +1,170 @@
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="admin-card">
+      <form action="<%= action %>" method="POST" id="postForm">
+        <% if (method !== 'POST') { %>
+        <input type="hidden" name="_method" value="PUT">
+        <% } %>
+
+        <!-- Title -->
+        <div class="mb-3">
+          <label for="title" class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
+          <input type="text" class="form-control form-control-lg" id="title" name="title"
+                 value="<%= post ? post.title : '' %>" required placeholder="My Awesome Post">
+        </div>
+
+        <!-- Slug -->
+        <div class="mb-3">
+          <label for="slug" class="form-label fw-semibold">
+            Slug <span class="text-muted fw-normal small">(auto-generated from title)</span>
+          </label>
+          <div class="input-group">
+            <span class="input-group-text text-muted small">/post/</span>
+            <input type="text" class="form-control font-monospace" id="slug" name="slug"
+                   value="<%= post ? post.slug : '' %>" placeholder="my-awesome-post">
+          </div>
+        </div>
+
+        <!-- Excerpt -->
+        <div class="mb-3">
+          <label for="excerpt" class="form-label fw-semibold">Excerpt <span class="text-danger">*</span></label>
+          <textarea class="form-control" id="excerpt" name="excerpt" rows="2" required
+                    placeholder="A short summary shown on the blog listing..."><%= post ? post.excerpt : '' %></textarea>
+          <div class="form-text">Shown on the blog listing page. Keep it under 200 characters.</div>
+        </div>
+
+        <!-- Content -->
+        <div class="mb-3">
+          <label for="content" class="form-label fw-semibold">Content <span class="text-danger">*</span></label>
+          <div class="mb-1">
+            <div class="btn-group btn-group-sm" role="group">
+              <button type="button" class="btn btn-outline-secondary" onclick="wrapSel('&lt;strong&gt;','&lt;/strong&gt;')" title="Bold"><i class="bi bi-type-bold"></i></button>
+              <button type="button" class="btn btn-outline-secondary" onclick="wrapSel('&lt;em&gt;','&lt;/em&gt;')" title="Italic"><i class="bi bi-type-italic"></i></button>
+              <button type="button" class="btn btn-outline-secondary" onclick="wrapSel('&lt;h3&gt;','&lt;/h3&gt;')" title="Heading">H3</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="wrapSel('&lt;p&gt;','&lt;/p&gt;')" title="Paragraph">P</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="wrapSel('&lt;a href=&quot;&quot;&gt;','&lt;/a&gt;')" title="Link"><i class="bi bi-link"></i></button>
+              <button type="button" class="btn btn-outline-secondary" onclick="wrapSel('&lt;code&gt;','&lt;/code&gt;')" title="Inline code"><i class="bi bi-code"></i></button>
+              <button type="button" class="btn btn-outline-secondary" onclick="wrapSel('&lt;pre&gt;&lt;code&gt;','&lt;/code&gt;&lt;/pre&gt;')" title="Code block"><i class="bi bi-code-square"></i></button>
+              <button type="button" class="btn btn-outline-secondary" onclick="wrapSel('&lt;ul&gt;\n  &lt;li&gt;','&lt;/li&gt;\n&lt;/ul&gt;')" title="List"><i class="bi bi-list-ul"></i></button>
+            </div>
+          </div>
+          <textarea class="form-control font-monospace" id="content" name="content" rows="18" required
+                    placeholder="Write your post content as HTML..."
+                    style="font-size:.85rem;resize:vertical"><%= post ? post.content : '' %></textarea>
+          <div class="form-text">HTML is supported. Use the toolbar above for quick formatting.</div>
+        </div>
+
+        <div class="d-flex gap-2 pt-2">
+          <button type="submit" class="btn btn-primary px-4">
+            <i class="bi bi-<%= post ? 'check2' : 'plus-lg' %> me-1"></i>
+            <%= post ? 'Save Changes' : 'Publish Post' %>
+          </button>
+          <a href="/admin/posts" class="btn btn-outline-secondary">Cancel</a>
+          <% if (post) { %>
+          <a href="/post/<%= post.slug %>" target="_blank" class="btn btn-outline-secondary ms-auto">
+            <i class="bi bi-eye me-1"></i>View Post
+          </a>
+          <% } %>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- Sidebar meta -->
+  <div class="col-lg-4">
+    <div class="admin-card">
+      <h6 class="fw-bold mb-3">Post Details</h6>
+
+      <!-- Category -->
+      <div class="mb-3">
+        <label for="categorySelect" class="form-label fw-semibold small">Category</label>
+        <select class="form-select" id="categorySelect" onchange="fillCategory(this)">
+          <option value="">— Pick existing —</option>
+          <% categories.forEach(cat => { %>
+          <option value="<%= cat.slug %>|<%= cat.label %>"
+            <%= post && post.category === cat.slug ? 'selected' : '' %>>
+            <%= cat.label %>
+          </option>
+          <% }) %>
+          <option value="__new__">+ New category…</option>
+        </select>
+      </div>
+
+      <div class="row g-2 mb-3">
+        <div class="col-6">
+          <label for="category" class="form-label small fw-semibold">Slug</label>
+          <input type="text" class="form-control form-control-sm font-monospace" id="category" name="category"
+                 value="<%= post ? post.category : '' %>" required placeholder="javascript">
+        </div>
+        <div class="col-6">
+          <label for="categoryLabel" class="form-label small fw-semibold">Label</label>
+          <input type="text" class="form-control form-control-sm" id="categoryLabel" name="categoryLabel"
+                 value="<%= post ? post.categoryLabel : '' %>" required placeholder="JavaScript">
+        </div>
+      </div>
+
+      <!-- Author -->
+      <div class="mb-3">
+        <label for="author" class="form-label fw-semibold small">Author</label>
+        <input type="text" class="form-control form-control-sm" id="author" name="author"
+               value="<%= post ? post.author : 'Evan Krocker' %>" required>
+      </div>
+
+      <!-- Date -->
+      <div class="mb-3">
+        <label for="date" class="form-label fw-semibold small">Publish Date</label>
+        <input type="date" class="form-control form-control-sm" id="date" name="date"
+               value="<%= post ? post.date : new Date().toISOString().slice(0,10) %>" required>
+      </div>
+    </div>
+
+    <% if (post) { %>
+    <div class="admin-card border-danger">
+      <h6 class="fw-bold mb-2 text-danger">Danger Zone</h6>
+      <p class="small text-muted mb-3">This permanently deletes the post and cannot be undone.</p>
+      <form id="deletePostForm" action="/admin/posts/<%= post.id %>/delete" method="POST">
+        <button type="button" class="btn btn-outline-danger btn-sm w-100" id="deletePostBtn"
+                data-title="<%= post.title %>">
+          <i class="bi bi-trash me-1"></i>Delete This Post
+        </button>
+      </form>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<script>
+const deleteBtn = document.getElementById('deletePostBtn');
+if (deleteBtn) {
+  deleteBtn.addEventListener('click', () => {
+    if (confirm('Delete "' + deleteBtn.dataset.title + '"? This cannot be undone.')) {
+      document.getElementById('deletePostForm').submit();
+    }
+  });
+}
+
+function fillCategory(sel) {
+  const val = sel.value;
+  if (!val) return;
+  if (val === '__new__') {
+    document.getElementById('category').value = '';
+    document.getElementById('categoryLabel').value = '';
+    document.getElementById('category').focus();
+    sel.value = '';
+    return;
+  }
+  const [slug, label] = val.split('|');
+  document.getElementById('category').value = slug;
+  document.getElementById('categoryLabel').value = label;
+}
+
+function wrapSel(open, close) {
+  const ta = document.getElementById('content');
+  const start = ta.selectionStart, end = ta.selectionEnd;
+  const sel = ta.value.substring(start, end);
+  const decoded = s => s.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"');
+  ta.setRangeText(decoded(open) + sel + decoded(close), start, end, 'end');
+  ta.focus();
+}
+</script>
