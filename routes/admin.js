@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const router = express.Router();
 
 // Injected into form pages to auto-generate slugs from titles
@@ -24,11 +25,42 @@ const SLUG_SCRIPT = `
   }
 `;
 
-const POSTS_FILE = path.join(__dirname, '../data/posts.json');
-const ADMIN_USER = process.env.ADMIN_USER || 'admin';
-const ADMIN_PASS = process.env.ADMIN_PASSWORD || 'admin123';
+const POSTS_FILE  = path.join(__dirname, '../data/posts.json');
+const CONFIG_FILE = path.join(__dirname, '../data/config.json');
+const ADMIN_USER  = process.env.ADMIN_USER || 'admin';
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
+// ── Password helpers ──────────────────────────────────────────────────────────
+
+function readConfig() {
+  try { return JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8')); }
+  catch { return {}; }
+}
+
+function writeConfig(cfg) {
+  fs.writeFileSync(CONFIG_FILE, JSON.stringify(cfg, null, 2));
+}
+
+function hashPassword(plain) {
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.scryptSync(plain, salt, 64).toString('hex');
+  return `${salt}:${hash}`;
+}
+
+function verifyPassword(plain, stored) {
+  const [salt, hash] = stored.split(':');
+  const derived = crypto.scryptSync(plain, salt, 64).toString('hex');
+  return crypto.timingSafeEqual(Buffer.from(hash, 'hex'), Buffer.from(derived, 'hex'));
+}
+
+// Returns true if the supplied password matches whichever credential store is active.
+// Priority: config.json hash > ADMIN_PASSWORD env var > default 'admin123'
+function checkPassword(plain) {
+  const cfg = readConfig();
+  if (cfg.passwordHash) return verifyPassword(plain, cfg.passwordHash);
+  return plain === (process.env.ADMIN_PASSWORD || 'admin123');
+}
+
+// ── Data helpers ──────────────────────────────────────────────────────────────
 
 function readPosts() {
   return JSON.parse(fs.readFileSync(POSTS_FILE, 'utf8'));
@@ -78,7 +110,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
-  if (username === ADMIN_USER && password === ADMIN_PASS) {
+  if (username === ADMIN_USER && checkPassword(password)) {
     req.session.adminLoggedIn = true;
     const returnTo = req.session.returnTo || '/admin';
     delete req.session.returnTo;
@@ -242,6 +274,51 @@ router.post('/posts/:id/delete', requireAuth, (req, res) => {
   writePosts(posts);
   flash(req, 'success', `Post "${title}" deleted.`);
   res.redirect('/admin/posts');
+});
+
+// ── Settings — change password ────────────────────────────────────────────────
+
+router.get('/settings', requireAuth, (req, res) => {
+  res.render('admin/settings', {
+    layout: 'admin/layout',
+    pageTitle: 'Settings',
+    activePage: 'settings',
+    actionBtn: null,
+    flash: getFlash(req),
+    extraScript: '',
+    usingHashedPassword: !!readConfig().passwordHash,
+  });
+});
+
+router.post('/settings/password', requireAuth, (req, res) => {
+  const { currentPassword, newPassword, confirmPassword } = req.body;
+
+  if (!checkPassword(currentPassword)) {
+    flash(req, 'danger', 'Current password is incorrect.');
+    return res.redirect('/admin/settings');
+  }
+
+  if (newPassword.length < 8) {
+    flash(req, 'danger', 'New password must be at least 8 characters.');
+    return res.redirect('/admin/settings');
+  }
+
+  if (newPassword !== confirmPassword) {
+    flash(req, 'danger', 'New passwords do not match.');
+    return res.redirect('/admin/settings');
+  }
+
+  const cfg = readConfig();
+  cfg.passwordHash = hashPassword(newPassword);
+  writeConfig(cfg);
+
+  // Invalidate all other sessions by rotating the session
+  req.session.regenerate(err => {
+    if (err) console.error('Session regenerate error:', err);
+    req.session.adminLoggedIn = true;
+    flash(req, 'success', 'Password updated successfully.');
+    res.redirect('/admin/settings');
+  });
 });
 
 module.exports = router;
