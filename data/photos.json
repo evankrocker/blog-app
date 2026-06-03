@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "Mountain Sunrise",
+    "category": "nature",
+    "date": "2026-04-15",
+    "description": "First light breaking over the peaks during an early morning hike.",
+    "src": "/images/placeholder-landscape.svg",
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": 2,
+    "title": "Downtown at Dusk",
+    "category": "urban",
+    "date": "2026-04-10",
+    "description": "The city skyline reflecting off the river as the sun sets.",
+    "src": "/images/placeholder-urban.svg",
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": 3,
+    "title": "Forest Trail",
+    "category": "nature",
+    "date": "2026-03-28",
+    "description": "A winding trail through old-growth forest in early spring.",
+    "src": "/images/placeholder-landscape.svg",
+    "width": 800,
+    "height": 1200
+  },
+  {
+    "id": 4,
+    "title": "Street Market",
+    "category": "urban",
+    "date": "2026-03-20",
+    "description": "Saturday morning farmers market, full of color and life.",
+    "src": "/images/placeholder-urban.svg",
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": 5,
+    "title": "Coastal Cliffs",
+    "category": "nature",
+    "date": "2026-03-05",
+    "description": "Dramatic sea cliffs at golden hour on the Pacific Coast.",
+    "src": "/images/placeholder-landscape.svg",
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": 6,
+    "title": "Night Architecture",
+    "category": "urban",
+    "date": "2026-02-18",
+    "description": "Long exposure of a modern building facade at night.",
+    "src": "/images/placeholder-urban.svg",
+    "width": 800,
+    "height": 1200
+  },
+  {
+    "id": 7,
+    "title": "Alpine Lake",
+    "category": "nature",
+    "date": "2026-02-10",
+    "description": "A crystal-clear alpine lake mirroring the surrounding peaks.",
+    "src": "/images/placeholder-landscape.svg",
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": 8,
+    "title": "Cafe Corner",
+    "category": "urban",
+    "date": "2026-01-30",
+    "description": "A quiet corner table at a neighborhood coffee shop on a rainy day.",
+    "src": "/images/placeholder-urban.svg",
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": 9,
+    "title": "Desert Bloom",
+    "category": "nature",
+    "date": "2026-01-20",
+    "description": "Wildflowers carpeting the desert floor after winter rains.",
+    "src": "/images/placeholder-landscape.svg",
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": 10,
+    "title": "Bridge Fog",
+    "category": "urban",
+    "date": "2026-01-12",
+    "description": "The suspension bridge emerging from a thick morning fog.",
+    "src": "/images/placeholder-urban.svg",
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": 11,
+    "title": "Waterfall",
+    "category": "nature",
+    "date": "2025-12-28",
+    "description": "A powerful waterfall hidden deep in a national forest.",
+    "src": "/images/placeholder-landscape.svg",
+    "width": 800,
+    "height": 1200
+  },
+  {
+    "id": 12,
+    "title": "Rooftop View",
+    "category": "urban",
+    "date": "2025-12-15",
+    "description": "Looking out across the city from a rooftop garden at dusk.",
+    "src": "/images/placeholder-urban.svg",
+    "width": 1200,
+    "height": 800
+  }
+]

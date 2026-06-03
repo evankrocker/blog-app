@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Personal Blog Platform",
+    "description": "A full-featured blog platform built with Node.js, Express, and EJS. Features include post categorization, pagination, photo galleries, and a responsive Bootstrap UI.",
+    "tech": ["Node.js", "Express", "EJS", "Bootstrap 5"],
+    "status": "active",
+    "github": "#",
+    "demo": "#",
+    "image": "/images/project-blog.svg"
+  },
+  {
+    "id": 2,
+    "title": "Task Manager API",
+    "description": "A RESTful API for managing tasks and projects. Built with Node.js and PostgreSQL, featuring JWT authentication, role-based access control, and full CRUD operations.",
+    "tech": ["Node.js", "Express", "PostgreSQL", "JWT"],
+    "status": "active",
+    "github": "#",
+    "demo": "#",
+    "image": "/images/project-api.svg"
+  },
+  {
+    "id": 3,
+    "title": "Weather Dashboard",
+    "description": "A real-time weather dashboard that aggregates data from multiple APIs. Displays current conditions, 7-day forecasts, and historical trends with interactive charts.",
+    "tech": ["JavaScript", "Chart.js", "OpenWeather API", "CSS Grid"],
+    "status": "active",
+    "github": "#",
+    "demo": "#",
+    "image": "/images/project-weather.svg"
+  },
+  {
+    "id": 4,
+    "title": "E-Commerce Store",
+    "description": "A full-stack e-commerce application with product listings, shopping cart, Stripe payment integration, and an admin dashboard for inventory management.",
+    "tech": ["React", "Node.js", "MongoDB", "Stripe"],
+    "status": "in-progress",
+    "github": "#",
+    "demo": "#",
+    "image": "/images/project-ecommerce.svg"
+  },
+  {
+    "id": 5,
+    "title": "CLI Dev Toolkit",
+    "description": "A collection of command-line utilities for automating common development tasks: project scaffolding, git hooks, code formatting, and deployment scripts.",
+    "tech": ["Node.js", "Commander.js", "Bash"],
+    "status": "active",
+    "github": "#",
+    "demo": null,
+    "image": "/images/project-cli.svg"
+  },
+  {
+    "id": 6,
+    "title": "Data Visualization Library",
+    "description": "A lightweight charting library built on top of SVG. Supports bar charts, line charts, pie charts, and scatter plots with smooth animations and responsive design.",
+    "tech": ["TypeScript", "SVG", "D3.js"],
+    "status": "archived",
+    "github": "#",
+    "demo": "#",
+    "image": "/images/project-charts.svg"
+  }
+]

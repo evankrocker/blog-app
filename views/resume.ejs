@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %> | Evan.dev</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="page-header">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-start justify-content-between gap-3">
+        <div>
+          <h1 class="mb-1"><%= resume.name %></h1>
+          <p class="text-muted mb-0 fs-5"><%= resume.title %></p>
+          <div class="d-flex flex-wrap gap-3 mt-2">
+            <span class="text-muted small"><i class="bi bi-envelope me-1"></i><%= resume.email %></span>
+            <span class="text-muted small"><i class="bi bi-geo-alt me-1"></i><%= resume.location %></span>
+          </div>
+        </div>
+        <a href="#" onclick="window.print();return false;" class="btn btn-primary btn-sm">
+          <i class="bi bi-printer me-1"></i>Print / Save PDF
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row g-5">
+
+      <!-- Main column -->
+      <div class="col-lg-8">
+
+        <!-- Summary -->
+        <div class="resume-section">
+          <div class="resume-section-title">Summary</div>
+          <p class="mb-0"><%= resume.summary %></p>
+        </div>
+
+        <!-- Experience -->
+        <div class="resume-section">
+          <div class="resume-section-title">Experience</div>
+          <% resume.experience.forEach(job => { %>
+          <div class="experience-item">
+            <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+              <div>
+                <h5 class="mb-0"><%= job.role %></h5>
+                <div class="text-muted"><%= job.company %> &mdash; <small><%= job.location %></small></div>
+              </div>
+              <span class="badge bg-light text-dark border fw-normal flex-shrink-0">
+                <i class="bi bi-calendar3 me-1"></i><%= job.start %> &ndash; <%= job.end %>
+              </span>
+            </div>
+            <ul class="mt-2 mb-0 ps-3">
+              <% job.bullets.forEach(b => { %>
+              <li class="mb-1"><%= b %></li>
+              <% }) %>
+            </ul>
+          </div>
+          <% }) %>
+        </div>
+
+        <!-- Education -->
+        <div class="resume-section">
+          <div class="resume-section-title">Education</div>
+          <% resume.education.forEach(edu => { %>
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div>
+              <h5 class="mb-0"><%= edu.degree %></h5>
+              <div class="text-muted"><%= edu.school %></div>
+            </div>
+            <div class="text-end">
+              <span class="badge bg-light text-dark border fw-normal"><%= edu.year %></span>
+              <% if (edu.gpa) { %><div class="small text-muted mt-1">GPA: <%= edu.gpa %></div><% } %>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+
+        <!-- Skills -->
+        <div class="resume-section">
+          <div class="resume-section-title">Skills</div>
+          <% resume.skills.forEach(sg => { %>
+          <div class="skill-group">
+            <strong><%= sg.category %></strong>
+            <div>
+              <% sg.items.forEach(skill => { %>
+              <span class="skill-pill"><%= skill %></span>
+              <% }) %>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+
+        <!-- Certifications -->
+        <div class="resume-section">
+          <div class="resume-section-title">Certifications</div>
+          <ul class="list-unstyled mb-0">
+            <% resume.certifications.forEach(cert => { %>
+            <li class="mb-2">
+              <i class="bi bi-patch-check-fill text-primary me-2"></i><%= cert %>
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="sidebar-widget mt-4">
+          <h5>Quick Links</h5>
+          <div class="d-grid gap-2">
+            <a href="/" class="btn btn-sm btn-outline-secondary text-start">
+              <i class="bi bi-pencil me-2"></i>Blog Posts
+            </a>
+            <a href="/projects" class="btn btn-sm btn-outline-secondary text-start">
+              <i class="bi bi-code-slash me-2"></i>Projects
+            </a>
+            <a href="/photos" class="btn btn-sm btn-outline-secondary text-start">
+              <i class="bi bi-camera me-2"></i>Photos
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

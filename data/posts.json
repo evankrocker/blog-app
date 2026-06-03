@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "slug": "getting-started-with-nodejs",
+    "title": "Getting Started with Node.js",
+    "category": "javascript",
+    "categoryLabel": "JavaScript",
+    "date": "2026-05-28",
+    "author": "Evan Krocker",
+    "excerpt": "Node.js has revolutionized server-side JavaScript development. In this post, we'll cover everything you need to know to get started building scalable applications.",
+    "content": "<p>Node.js has revolutionized server-side JavaScript development. Built on Chrome's V8 engine, it allows developers to run JavaScript outside the browser — opening up a world of possibilities for building fast, scalable network applications.</p><h3>Why Node.js?</h3><p>Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. This makes it perfect for data-intensive real-time applications that run across distributed devices.</p><h3>Installing Node.js</h3><p>Head over to nodejs.org and download the LTS version for your platform. The installer includes npm (Node Package Manager) which you'll use to manage dependencies.</p><pre><code>node -v\nnpm -v</code></pre><h3>Your First App</h3><p>Create a file called <code>app.js</code> and add the following:</p><pre><code>const http = require('http');\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, {'Content-Type': 'text/plain'});\n  res.end('Hello, World!');\n});\nserver.listen(3000);</code></pre><p>Run it with <code>node app.js</code> and visit <code>http://localhost:3000</code>.</p>"
+  },
+  {
+    "id": 2,
+    "slug": "responsive-design-with-bootstrap-5",
+    "title": "Responsive Design with Bootstrap 5",
+    "category": "css",
+    "categoryLabel": "CSS",
+    "date": "2026-05-22",
+    "author": "Evan Krocker",
+    "excerpt": "Bootstrap 5 makes building responsive, mobile-first websites fast and easy. Let's explore the grid system, components, and utilities that make it so powerful.",
+    "content": "<p>Bootstrap 5 is the most popular CSS framework for building responsive, mobile-first websites. With its comprehensive suite of components and a powerful grid system, you can build beautiful UIs without writing tons of custom CSS.</p><h3>The Grid System</h3><p>Bootstrap uses a 12-column grid system. You can create flexible layouts using container, row, and col classes:</p><pre><code>&lt;div class=\"container\"&gt;\n  &lt;div class=\"row\"&gt;\n    &lt;div class=\"col-md-6\"&gt;Left column&lt;/div&gt;\n    &lt;div class=\"col-md-6\"&gt;Right column&lt;/div&gt;\n  &lt;/div&gt;\n&lt;/div&gt;</code></pre><h3>Key Components</h3><p>Bootstrap ships with dozens of ready-to-use components: Navbars, cards, modals, forms, buttons, alerts, and much more. All of them are customizable via CSS variables or Sass.</p><h3>Utility Classes</h3><p>Bootstrap 5 introduced a massive set of utility classes for spacing, typography, flexbox, and more — reducing the need for custom CSS significantly.</p>"
+  },
+  {
+    "id": 3,
+    "slug": "understanding-async-await",
+    "title": "Understanding Async/Await in JavaScript",
+    "category": "javascript",
+    "categoryLabel": "JavaScript",
+    "date": "2026-05-15",
+    "author": "Evan Krocker",
+    "excerpt": "Async/await syntax makes working with asynchronous code much cleaner and easier to reason about. Here's a deep dive into how it works under the hood.",
+    "content": "<p>Async/await is one of the most impactful additions to modern JavaScript. It allows you to write asynchronous code that reads like synchronous code, making it far easier to understand and debug.</p><h3>The Promise Foundation</h3><p>Async/await is built on top of Promises. An <code>async</code> function always returns a Promise, and <code>await</code> pauses execution until that Promise resolves.</p><pre><code>async function fetchData(url) {\n  try {\n    const response = await fetch(url);\n    const data = await response.json();\n    return data;\n  } catch (error) {\n    console.error('Error:', error);\n  }\n}</code></pre><h3>Error Handling</h3><p>Wrap your await calls in try/catch blocks to handle errors gracefully. This is much cleaner than chaining <code>.catch()</code> handlers on nested Promises.</p><h3>Parallel Execution</h3><p>Use <code>Promise.all()</code> when you need to run multiple async operations in parallel:</p><pre><code>const [users, posts] = await Promise.all([\n  fetchUsers(),\n  fetchPosts()\n]);</code></pre>"
+  },
+  {
+    "id": 4,
+    "slug": "linux-command-line-essentials",
+    "title": "Linux Command Line Essentials",
+    "category": "devops",
+    "categoryLabel": "DevOps",
+    "date": "2026-05-08",
+    "author": "Evan Krocker",
+    "excerpt": "Mastering the Linux command line is a superpower for any developer. This guide covers the essential commands every developer should know.",
+    "content": "<p>The command line is an indispensable tool for developers. Whether you're managing servers, automating tasks, or navigating your filesystem, knowing your way around the terminal will make you significantly more productive.</p><h3>Navigation</h3><pre><code>pwd          # print working directory\nls -la       # list all files with details\ncd /path     # change directory\nmkdir mydir  # create directory</code></pre><h3>File Operations</h3><pre><code>cp src dest  # copy\nmv src dest  # move / rename\nrm -rf dir   # remove recursively\ncat file     # view file contents\ngrep -r \"term\" . # search recursively</code></pre><h3>Process Management</h3><pre><code>ps aux       # list processes\nkill -9 PID  # force kill process\ntop          # real-time process monitor\n&              # run in background</code></pre><h3>Networking</h3><pre><code>curl -I url  # fetch HTTP headers\nwget url     # download file\nnetstat -tuln # show listening ports\nssh user@host # connect via SSH</code></pre>"
+  },
+  {
+    "id": 5,
+    "slug": "introduction-to-docker",
+    "title": "Introduction to Docker",
+    "category": "devops",
+    "categoryLabel": "DevOps",
+    "date": "2026-04-30",
+    "author": "Evan Krocker",
+    "excerpt": "Docker changed how we build, ship, and run software. Learn the core concepts of containers and how to containerize your Node.js app.",
+    "content": "<p>Docker lets you package an application and all its dependencies into a standardized unit called a container. Containers ensure your app runs the same everywhere — from your laptop to production.</p><h3>Key Concepts</h3><ul><li><strong>Image:</strong> A read-only template for creating containers</li><li><strong>Container:</strong> A running instance of an image</li><li><strong>Dockerfile:</strong> Instructions to build an image</li><li><strong>Registry:</strong> A place to store and share images (e.g., Docker Hub)</li></ul><h3>A Simple Dockerfile for Node.js</h3><pre><code>FROM node:18-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install --production\nCOPY . .\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]</code></pre><h3>Essential Commands</h3><pre><code>docker build -t myapp .  # build image\ndocker run -p 3000:3000 myapp  # run container\ndocker ps           # list containers\ndocker stop &lt;id&gt;    # stop container\ndocker-compose up   # start multi-container app</code></pre>"
+  },
+  {
+    "id": 6,
+    "slug": "git-workflows-for-teams",
+    "title": "Git Workflows for Teams",
+    "category": "devops",
+    "categoryLabel": "DevOps",
+    "date": "2026-04-22",
+    "author": "Evan Krocker",
+    "excerpt": "Choosing the right Git workflow for your team can dramatically improve productivity and code quality. Let's compare the most popular approaches.",
+    "content": "<p>Git is the backbone of modern software development, but the workflow you choose can make a big difference in team velocity and code quality. Here are the most common approaches.</p><h3>Feature Branch Workflow</h3><p>Each feature lives in its own branch. When done, you open a pull request and merge to main after review. Simple and effective for most teams.</p><h3>Gitflow</h3><p>Gitflow uses dedicated branches for features, releases, and hotfixes. It's more structured and works well for projects with scheduled release cycles.</p><h3>Trunk-Based Development</h3><p>Everyone commits to main (trunk) multiple times per day, relying on feature flags to hide incomplete work. Preferred by high-velocity teams practicing continuous deployment.</p><h3>Tips for Any Workflow</h3><ul><li>Write clear commit messages in imperative mood: \"Add user auth\" not \"Added user auth\"</li><li>Keep PRs small and focused — they're easier to review</li><li>Rebase over merge for a cleaner history when appropriate</li><li>Protect your main branch with required reviews and status checks</li></ul>"
+  },
+  {
+    "id": 7,
+    "slug": "building-rest-apis-with-express",
+    "title": "Building REST APIs with Express",
+    "category": "javascript",
+    "categoryLabel": "JavaScript",
+    "date": "2026-04-15",
+    "author": "Evan Krocker",
+    "excerpt": "Express makes building REST APIs in Node.js remarkably straightforward. This tutorial walks through creating a full CRUD API from scratch.",
+    "content": "<p>Express is the de-facto standard for building REST APIs in Node.js. It's minimal, flexible, and has a rich ecosystem of middleware.</p><h3>Setup</h3><pre><code>npm init -y\nnpm install express</code></pre><h3>Basic Structure</h3><pre><code>const express = require('express');\nconst app = express();\napp.use(express.json());\n\napp.get('/api/posts', (req, res) => {\n  res.json({ posts: [] });\n});\n\napp.post('/api/posts', (req, res) => {\n  const post = req.body;\n  res.status(201).json(post);\n});\n\napp.listen(3000);</code></pre><h3>Route Parameters</h3><pre><code>app.get('/api/posts/:id', (req, res) => {\n  const { id } = req.params;\n  res.json({ id });\n});</code></pre><h3>Middleware</h3><p>Middleware functions run before your route handlers. Use them for logging, auth, validation, error handling, and more.</p>"
+  },
+  {
+    "id": 8,
+    "slug": "css-grid-layout-guide",
+    "title": "CSS Grid Layout: A Practical Guide",
+    "category": "css",
+    "categoryLabel": "CSS",
+    "date": "2026-04-05",
+    "author": "Evan Krocker",
+    "excerpt": "CSS Grid is the most powerful layout system available in CSS. This guide covers everything from basic grids to complex magazine-style layouts.",
+    "content": "<p>CSS Grid is a two-dimensional layout system that fundamentally changes how we build web layouts. It lets you control both columns and rows simultaneously.</p><h3>Creating a Basic Grid</h3><pre><code>.container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 1rem;\n}</code></pre><h3>Spanning Cells</h3><pre><code>.featured {\n  grid-column: 1 / 3;  /* spans 2 columns */\n  grid-row: 1 / 3;     /* spans 2 rows */\n}</code></pre><h3>Named Grid Areas</h3><pre><code>.layout {\n  display: grid;\n  grid-template-areas:\n    \"header header\"\n    \"sidebar main\"\n    \"footer footer\";\n}\n.header { grid-area: header; }</code></pre><h3>Auto-Fit and Minmax</h3><p>Create responsive grids without media queries:</p><pre><code>grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));</code></pre>"
+  },
+  {
+    "id": 9,
+    "slug": "python-for-data-science",
+    "title": "Python for Data Science: Getting Started",
+    "category": "python",
+    "categoryLabel": "Python",
+    "date": "2026-03-28",
+    "author": "Evan Krocker",
+    "excerpt": "Python has become the dominant language for data science. Here's your roadmap to getting started with pandas, numpy, and matplotlib.",
+    "content": "<p>Python's simplicity combined with powerful libraries like NumPy, pandas, and matplotlib make it the go-to language for data science and machine learning.</p><h3>Essential Libraries</h3><ul><li><strong>NumPy:</strong> Fast numerical computing with N-dimensional arrays</li><li><strong>pandas:</strong> Data manipulation and analysis with DataFrames</li><li><strong>matplotlib:</strong> Data visualization</li><li><strong>scikit-learn:</strong> Machine learning algorithms</li></ul><h3>Loading and Exploring Data</h3><pre><code>import pandas as pd\n\ndf = pd.read_csv('data.csv')\nprint(df.head())\nprint(df.describe())\nprint(df.info())</code></pre><h3>Data Cleaning</h3><pre><code># Drop missing values\ndf.dropna(inplace=True)\n\n# Fill missing values\ndf['age'].fillna(df['age'].mean(), inplace=True)\n\n# Remove duplicates\ndf.drop_duplicates(inplace=True)</code></pre>"
+  },
+  {
+    "id": 10,
+    "slug": "web-accessibility-best-practices",
+    "title": "Web Accessibility Best Practices",
+    "category": "css",
+    "categoryLabel": "CSS",
+    "date": "2026-03-20",
+    "author": "Evan Krocker",
+    "excerpt": "Building accessible websites is both a moral responsibility and increasingly a legal one. Here are the key practices every developer should follow.",
+    "content": "<p>Web accessibility (a11y) ensures that websites are usable by people with disabilities. Beyond being the right thing to do, accessibility improves SEO and usability for everyone.</p><h3>Semantic HTML</h3><p>Use HTML elements for their intended purpose. A <code>&lt;button&gt;</code> is better than a <code>&lt;div&gt;</code> with a click handler because it's keyboard-focusable and announces itself to screen readers.</p><h3>ARIA Attributes</h3><pre><code>&lt;nav aria-label=\"Main navigation\"&gt;\n&lt;button aria-expanded=\"false\" aria-controls=\"menu\"&gt;\n&lt;img alt=\"A sunset over the mountains\"&gt;</code></pre><h3>Keyboard Navigation</h3><p>All interactive elements must be reachable and operable via keyboard. Test your site by unplugging your mouse.</p><h3>Color Contrast</h3><p>WCAG 2.1 requires a contrast ratio of at least 4.5:1 for normal text. Use tools like the WebAIM Contrast Checker to verify your palette.</p><h3>Focus Management</h3><p>Never use <code>outline: none</code> without providing an alternative focus style. Users navigating by keyboard rely on visible focus indicators.</p>"
+  },
+  {
+    "id": 11,
+    "slug": "introduction-to-postgresql",
+    "title": "Introduction to PostgreSQL",
+    "category": "databases",
+    "categoryLabel": "Databases",
+    "date": "2026-03-12",
+    "author": "Evan Krocker",
+    "excerpt": "PostgreSQL is one of the world's most advanced open-source relational databases. Learn how to set it up and start querying data.",
+    "content": "<p>PostgreSQL (Postgres) is a powerful, open-source relational database system with over 35 years of active development. It's known for its reliability, feature robustness, and performance.</p><h3>Installation</h3><pre><code># Ubuntu/Debian\nsudo apt install postgresql postgresql-contrib\nsudo systemctl start postgresql</code></pre><h3>Basic SQL</h3><pre><code>-- Create a table\nCREATE TABLE posts (\n  id SERIAL PRIMARY KEY,\n  title VARCHAR(255) NOT NULL,\n  content TEXT,\n  created_at TIMESTAMP DEFAULT NOW()\n);\n\n-- Insert data\nINSERT INTO posts (title, content)\nVALUES ('My First Post', 'Hello world!');\n\n-- Query data\nSELECT * FROM posts ORDER BY created_at DESC;</code></pre><h3>Node.js Integration</h3><pre><code>npm install pg\n\nconst { Pool } = require('pg');\nconst pool = new Pool({ connectionString: process.env.DATABASE_URL });\nconst { rows } = await pool.query('SELECT * FROM posts');</code></pre>"
+  },
+  {
+    "id": 12,
+    "slug": "typescript-basics-for-javascript-devs",
+    "title": "TypeScript Basics for JavaScript Developers",
+    "category": "javascript",
+    "categoryLabel": "JavaScript",
+    "date": "2026-03-05",
+    "author": "Evan Krocker",
+    "excerpt": "TypeScript adds static typing to JavaScript, catching bugs at compile time. If you already know JavaScript, picking up TypeScript is easier than you think.",
+    "content": "<p>TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It adds optional static typing, interfaces, and other features that make large codebases much more maintainable.</p><h3>Basic Types</h3><pre><code>let name: string = 'Alice';\nlet age: number = 30;\nlet isActive: boolean = true;\nlet tags: string[] = ['ts', 'js'];</code></pre><h3>Interfaces</h3><pre><code>interface Post {\n  id: number;\n  title: string;\n  content: string;\n  published?: boolean; // optional\n}</code></pre><h3>Functions</h3><pre><code>function greet(name: string): string {\n  return `Hello, ${name}!`;\n}\n\nconst add = (a: number, b: number): number => a + b;</code></pre><h3>Generics</h3><pre><code>function first&lt;T&gt;(arr: T[]): T {\n  return arr[0];\n}\n\nconst num = first([1, 2, 3]);    // type: number\nconst str = first(['a', 'b']);   // type: string</code></pre>"
+  }
+]

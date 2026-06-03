@@ -1,0 +1,81 @@
+{
+  "name": "Evan Krocker",
+  "title": "Full-Stack Web Developer",
+  "email": "ekrocker@gmail.com",
+  "location": "San Francisco, CA",
+  "summary": "Experienced full-stack developer with a passion for building clean, performant web applications. Proficient in JavaScript/TypeScript, Node.js, React, and modern DevOps practices. Strong advocate for open source and developer tooling.",
+  "skills": [
+    {
+      "category": "Languages",
+      "items": ["JavaScript", "TypeScript", "Python", "SQL", "Bash"]
+    },
+    {
+      "category": "Frontend",
+      "items": ["React", "HTML5", "CSS3 / Sass", "Bootstrap", "Webpack", "Vite"]
+    },
+    {
+      "category": "Backend",
+      "items": ["Node.js", "Express", "REST APIs", "GraphQL"]
+    },
+    {
+      "category": "Databases",
+      "items": ["PostgreSQL", "MongoDB", "Redis", "SQLite"]
+    },
+    {
+      "category": "DevOps & Tools",
+      "items": ["Docker", "GitHub Actions", "Linux", "Nginx", "Git"]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Senior Software Engineer",
+      "company": "TechCorp Inc.",
+      "location": "San Francisco, CA",
+      "start": "Jan 2023",
+      "end": "Present",
+      "bullets": [
+        "Led development of a high-traffic SaaS platform serving 50,000+ daily active users",
+        "Reduced API response times by 40% through query optimization and Redis caching",
+        "Architected and shipped a real-time notification system using WebSockets",
+        "Mentored two junior engineers through code reviews and pair programming sessions"
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Startup Labs",
+      "location": "Remote",
+      "start": "Mar 2021",
+      "end": "Dec 2022",
+      "bullets": [
+        "Built and maintained a Node.js/React application from MVP to production launch",
+        "Implemented CI/CD pipelines with GitHub Actions, reducing deployment time by 60%",
+        "Designed a PostgreSQL schema for complex relational data supporting analytics dashboards",
+        "Contributed to an open-source component library with 500+ GitHub stars"
+      ]
+    },
+    {
+      "role": "Junior Web Developer",
+      "company": "Agency Co.",
+      "location": "Austin, TX",
+      "start": "Jun 2019",
+      "end": "Feb 2021",
+      "bullets": [
+        "Delivered 15+ client websites using modern HTML/CSS/JavaScript and CMS platforms",
+        "Improved site performance scores by auditing and optimizing assets and rendering",
+        "Collaborated with designers to implement pixel-perfect, responsive UIs"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.S. Computer Science",
+      "school": "University of Texas at Austin",
+      "year": "2019",
+      "gpa": "3.7"
+    }
+  ],
+  "certifications": [
+    "AWS Certified Developer – Associate (2024)",
+    "MongoDB Certified Developer (2022)"
+  ]
+}
