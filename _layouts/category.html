@@ -5,56 +5,69 @@ layout: default
 {% assign cat_meta = site.category_meta[cat] %}
 
 <div class="container py-5">
-  <div class="row g-5">
+  <div class="row g-4 g-lg-5">
+
+    <!-- Post list -->
     <div class="col-lg-8">
-      <div class="category-header mb-5">
-        <span class="category-badge d-inline-block mb-3"
-              style="background-color:{{ cat_meta.color }};color:{{ cat_meta.text_color }};">
+
+      <header class="mb-5">
+        <a href="{{ '/category/' | append: cat | relative_url }}"
+           class="badge badge-{{ cat }} text-decoration-none mb-3 d-inline-block fs-6 px-3 py-2">
           {{ cat_meta.label | default: page.title }}
-        </span>
-        <h1 class="fw-bold">{{ cat_meta.label | default: page.title }}</h1>
-        <p class="text-muted">{{ page.posts | size }} post{% if page.posts.size != 1 %}s{% endif %}</p>
-      </div>
+        </a>
+        <h1 class="display-6 fw-bold mb-1">{{ cat_meta.label | default: page.title }}</h1>
+        <p class="text-muted mb-0">
+          {{ page.posts | size }} post{% if page.posts.size != 1 %}s{% endif %}
+        </p>
+      </header>
 
       {% if page.posts.size > 0 %}
-        <div class="post-list">
+        <div class="row g-4">
           {% for post in page.posts %}
-            <article class="post-card mb-4">
-              <div class="card h-100 border-0 shadow-sm">
+            <div class="col-12">
+              <article class="card border-0 shadow-sm h-100">
                 <div class="card-body p-4">
-                  <a href="{{ '/category/' | append: post.categories[0] | relative_url }}"
-                     class="category-badge mb-2 d-inline-block"
-                     style="background-color:{{ cat_meta.color }};color:{{ cat_meta.text_color }};">
-                    {{ cat_meta.label | default: post.categories[0] }}
-                  </a>
-                  <h2 class="card-title h5 fw-bold">
-                    <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark stretched-link">
+                  <span class="badge badge-{{ cat }} mb-2 d-inline-block">
+                    {{ cat_meta.label | default: cat }}
+                  </span>
+                  <h2 class="card-title h5 fw-semibold mb-2">
+                    <a href="{{ post.url | relative_url }}"
+                       class="text-decoration-none text-dark stretched-link">
                       {{ post.title }}
                     </a>
                   </h2>
-                  <p class="card-text text-muted small mb-3">{{ post.excerpt | strip_html | truncate: 140 }}</p>
-                  <div class="text-muted small">
-                    <i class="bi bi-calendar3"></i>
-                    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
-                  </div>
+                  <p class="card-text text-secondary small mb-0">
+                    {{ post.excerpt | strip_html | truncate: 150 }}
+                  </p>
                 </div>
-              </div>
-            </article>
+                <div class="card-footer bg-white border-0 px-4 pb-3">
+                  <small class="text-muted">
+                    <i class="bi bi-calendar3 me-1"></i>
+                    <time datetime="{{ post.date | date_to_xmlschema }}">
+                      {{ post.date | date: "%B %-d, %Y" }}
+                    </time>
+                  </small>
+                </div>
+              </article>
+            </div>
           {% endfor %}
         </div>
       {% else %}
-        <p class="text-muted">No posts in this category yet.</p>
+        <div class="alert alert-light border">No posts in this category yet.</div>
       {% endif %}
 
       <div class="mt-4">
         <a href="{{ '/' | relative_url }}" class="btn btn-outline-secondary btn-sm">
-          <i class="bi bi-arrow-left"></i> All Posts
+          <i class="bi bi-arrow-left me-1"></i>All Posts
         </a>
       </div>
+
     </div>
 
+    <!-- Sidebar -->
     <div class="col-lg-4">
       {% include sidebar.html %}
     </div>
+
   </div>
 </div>

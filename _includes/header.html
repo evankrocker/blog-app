@@ -1,37 +1,41 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="{{ '/' | relative_url }}">
-        {{ site.title }}
+
+      <a class="navbar-brand fw-bold fs-5" href="{{ '/' | relative_url }}">
+        <i class="bi bi-journal-code me-1"></i>{{ site.title }}
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarMain" aria-controls="navbarMain"
-              aria-expanded="false" aria-label="Toggle navigation">
+
+      <button class="navbar-toggler border-0" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navMain"
+              aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarMain">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-1">
+
           <li class="nav-item">
-            <a class="nav-link {% if page.url == '/' %}active{% endif %}"
-               href="{{ '/' | relative_url }}">Blog</a>
+            <a class="nav-link rounded px-3 {% if page.url == '/' %}active fw-semibold{% endif %}"
+               href="{{ '/' | relative_url }}">
+              <i class="bi bi-house me-1 d-lg-none"></i>Blog
+            </a>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {% if page.layout == 'category' %}active{% endif %}"
+            <a class="nav-link dropdown-toggle rounded px-3 {% if page.layout == 'category' %}active fw-semibold{% endif %}"
                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categories
+              <i class="bi bi-tag me-1 d-lg-none"></i>Categories
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-1">
               {% for cat in site.categories %}
                 {% assign cat_key = cat[0] %}
                 {% assign cat_meta = site.category_meta[cat_key] %}
                 <li>
-                  <a class="dropdown-item" href="{{ '/category/' | append: cat_key | relative_url }}">
-                    <span class="category-dot"
-                          style="background-color:{{ cat_meta.color }};"></span>
-                    {{ cat_meta.label | default: cat_key }}
-                    <span class="badge bg-secondary ms-1">{{ cat[1].size }}</span>
+                  <a class="dropdown-item d-flex align-items-center justify-content-between py-2"
+                     href="{{ '/category/' | append: cat_key | relative_url }}">
+                    <span class="badge badge-{{ cat_key }}">{{ cat_meta.label | default: cat_key }}</span>
+                    <span class="badge bg-light text-dark border ms-3">{{ cat[1].size }}</span>
                   </a>
                 </li>
               {% endfor %}
@@ -39,14 +43,19 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if page.url contains '/projects' %}active{% endif %}"
-               href="{{ '/projects' | relative_url }}">Projects</a>
+            <a class="nav-link rounded px-3 {% if page.url contains '/projects' %}active fw-semibold{% endif %}"
+               href="{{ '/projects/' | relative_url }}">
+              <i class="bi bi-grid me-1 d-lg-none"></i>Projects
+            </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if page.url contains '/about' %}active{% endif %}"
-               href="{{ '/about' | relative_url }}">About</a>
+            <a class="nav-link rounded px-3 {% if page.url contains '/about' %}active fw-semibold{% endif %}"
+               href="{{ '/about/' | relative_url }}">
+              <i class="bi bi-person me-1 d-lg-none"></i>About
+            </a>
           </li>
+
         </ul>
       </div>
     </div>

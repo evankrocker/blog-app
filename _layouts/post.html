@@ -1,46 +1,56 @@
 ---
 layout: default
 ---
+{% assign cat = page.categories[0] %}
+{% assign cat_meta = site.category_meta[cat] %}
+
 <div class="container py-5">
-  <div class="row g-5">
+  <div class="row g-4 g-lg-5">
+
+    <!-- Post body -->
     <div class="col-lg-8">
       <article>
+
         <header class="mb-4">
-          {% assign cat = page.categories[0] %}
-          {% assign cat_meta = site.category_meta[cat] %}
           <a href="{{ '/category/' | append: cat | relative_url }}"
-             class="category-badge mb-3 d-inline-block"
-             style="background-color:{{ cat_meta.color }};color:{{ cat_meta.text_color }};">
+             class="badge badge-{{ cat }} text-decoration-none mb-3 d-inline-block">
             {{ cat_meta.label | default: cat }}
           </a>
-          <h1 class="post-title">{{ page.title }}</h1>
-          <div class="post-meta text-muted">
-            <i class="bi bi-calendar3"></i>
-            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
-            <span class="mx-2">&middot;</span>
-            <i class="bi bi-person"></i>
-            {{ page.author | default: site.author.name }}
+          <h1 class="display-6 fw-bold lh-sm mb-3">{{ page.title }}</h1>
+          <div class="d-flex flex-wrap align-items-center gap-3 text-muted small border-bottom pb-4 mb-4">
+            <span>
+              <i class="bi bi-calendar3 me-1"></i>
+              <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+            </span>
+            <span>
+              <i class="bi bi-person me-1"></i>{{ page.author | default: site.author.name }}
+            </span>
           </div>
         </header>
 
-        <div class="post-content">
+        <div class="post-content fs-6 lh-lg">
           {{ content }}
         </div>
 
         <hr class="my-5">
+
         <div class="d-flex justify-content-between flex-wrap gap-2">
           <a href="{{ '/' | relative_url }}" class="btn btn-outline-secondary btn-sm">
-            <i class="bi bi-arrow-left"></i> All Posts
+            <i class="bi bi-arrow-left me-1"></i>All Posts
           </a>
           <a href="{{ '/category/' | append: cat | relative_url }}" class="btn btn-outline-primary btn-sm">
-            More {{ cat_meta.label | default: cat }} posts
+            More {{ cat_meta.label | default: cat }}
+            <i class="bi bi-arrow-right ms-1"></i>
           </a>
         </div>
+
       </article>
     </div>
 
+    <!-- Sidebar -->
     <div class="col-lg-4">
       {% include sidebar.html %}
     </div>
+
   </div>
 </div>

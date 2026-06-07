@@ -6,49 +6,46 @@ paginate_path: /page/:num/
 ---
 
 <!-- Hero -->
-<section class="blog-hero">
-  <div class="container">
-    <h1>{{ site.title }}</h1>
-    <p class="lead mt-2">{{ site.description }}</p>
+<section class="bg-dark text-white py-5">
+  <div class="container py-md-3">
+    <h1 class="display-5 fw-bold mb-3">{{ site.title }}</h1>
+    <p class="lead text-white-50 mb-0">{{ site.description }}</p>
   </div>
 </section>
 
 <!-- Posts + Sidebar -->
 <div class="container py-5">
-  <div class="row g-5">
-    <div class="col-lg-8">
+  <div class="row g-4 g-lg-5">
 
+    <div class="col-lg-8">
       {% if paginator.posts.size > 0 %}
         <div class="row g-4">
           {% for post in paginator.posts %}
             {% assign cat = post.categories[0] %}
             {% assign cat_meta = site.category_meta[cat] %}
             <div class="col-12">
-              <article class="post-card">
-                <div class="card border-0 shadow-sm h-100">
-                  <div class="card-body p-4">
-                    <a href="{{ '/category/' | append: cat | relative_url }}"
-                       class="category-badge mb-2 d-inline-block"
-                       style="background-color:{{ cat_meta.color }};color:{{ cat_meta.text_color }};">
-                      {{ cat_meta.label | default: cat }}
+              <article class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                  <a href="{{ '/category/' | append: cat | relative_url }}"
+                     class="badge badge-{{ cat }} text-decoration-none mb-2 d-inline-block">
+                    {{ cat_meta.label | default: cat }}
+                  </a>
+                  <h2 class="card-title h5 fw-semibold mb-2">
+                    <a href="{{ post.url | relative_url }}"
+                       class="text-decoration-none text-dark stretched-link">
+                      {{ post.title }}
                     </a>
-                    <h2 class="card-title h5 fw-bold mb-2">
-                      <a href="{{ post.url | relative_url }}"
-                         class="text-decoration-none text-dark stretched-link">
-                        {{ post.title }}
-                      </a>
-                    </h2>
-                    <p class="card-text text-muted mb-3">
-                      {{ post.excerpt | strip_html | truncate: 160 }}
-                    </p>
-                    <div class="text-muted small">
-                      <i class="bi bi-calendar3"></i>
-                      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
-                      <span class="mx-2">&middot;</span>
-                      <i class="bi bi-person"></i>
-                      {{ post.author | default: site.author.name }}
-                    </div>
-                  </div>
+                  </h2>
+                  <p class="card-text text-secondary small mb-0">
+                    {{ post.excerpt | strip_html | truncate: 150 }}
+                  </p>
+                </div>
+                <div class="card-footer bg-white border-0 px-4 pb-3">
+                  <small class="text-muted">
+                    <i class="bi bi-calendar3 me-1"></i>{{ post.date | date: "%b %-d, %Y" }}
+                    <span class="mx-1">&middot;</span>
+                    <i class="bi bi-person me-1"></i>{{ post.author | default: site.author.name }}
+                  </small>
                 </div>
               </article>
             </div>
@@ -57,58 +54,55 @@ paginate_path: /page/:num/
 
         <!-- Pagination -->
         {% if paginator.total_pages > 1 %}
-          <nav class="mt-5" aria-label="Page navigation">
+          <nav class="mt-5" aria-label="Post pagination">
             <ul class="pagination justify-content-center">
-              {% if paginator.previous_page %}
-                <li class="page-item">
-                  <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}" aria-label="Previous">
-                    <i class="bi bi-chevron-left"></i>
-                  </a>
-                </li>
-              {% else %}
-                <li class="page-item disabled">
-                  <span class="page-link"><i class="bi bi-chevron-left"></i></span>
-                </li>
-              {% endif %}
+              <li class="page-item {% unless paginator.previous_page %}disabled{% endunless %}">
+                <a class="page-link"
+                   href="{{ paginator.previous_page_path | default: '#' | relative_url }}"
+                   aria-label="Previous">
+                  <i class="bi bi-chevron-left"></i>
+                </a>
+              </li>
 
-              {% for page in (1..paginator.total_pages) %}
-                {% if page == paginator.page %}
-                  <li class="page-item active">
-                    <span class="page-link">{{ page }}</span>
+              {% for p in (1..paginator.total_pages) %}
+                {% if p == paginator.page %}
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">{{ p }}</span>
                   </li>
-                {% elsif page == 1 %}
+                {% elsif p == 1 %}
                   <li class="page-item">
-                    <a class="page-link" href="{{ '/' | relative_url }}">{{ page }}</a>
+                    <a class="page-link" href="{{ '/' | relative_url }}">{{ p }}</a>
                   </li>
                 {% else %}
                   <li class="page-item">
-                    <a class="page-link" href="{{ site.paginate_path | replace: ':num', page | relative_url }}">{{ page }}</a>
+                    <a class="page-link"
+                       href="{{ site.paginate_path | replace: ':num', p | relative_url }}">
+                      {{ p }}
+                    </a>
                   </li>
                 {% endif %}
               {% endfor %}
 
-              {% if paginator.next_page %}
-                <li class="page-item">
-                  <a class="page-link" href="{{ paginator.next_page_path | relative_url }}" aria-label="Next">
-                    <i class="bi bi-chevron-right"></i>
-                  </a>
-                </li>
-              {% else %}
-                <li class="page-item disabled">
-                  <span class="page-link"><i class="bi bi-chevron-right"></i></span>
-                </li>
-              {% endif %}
+              <li class="page-item {% unless paginator.next_page %}disabled{% endunless %}">
+                <a class="page-link"
+                   href="{{ paginator.next_page_path | default: '#' | relative_url }}"
+                   aria-label="Next">
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </li>
             </ul>
           </nav>
         {% endif %}
 
       {% else %}
-        <p class="text-muted">No posts yet. Check back soon!</p>
+        <div class="alert alert-light border">No posts yet — check back soon!</div>
       {% endif %}
     </div>
 
+    <!-- Sidebar -->
     <div class="col-lg-4">
       {% include sidebar.html %}
     </div>
+
   </div>
 </div>
