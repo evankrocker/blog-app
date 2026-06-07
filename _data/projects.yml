@@ -1,0 +1,59 @@
+- title: Personal Blog Platform
+  description: A full-featured blog platform built with Node.js, Express, and EJS. Features include post categorization, pagination, photo galleries, and a responsive Bootstrap UI.
+  tech: [Node.js, Express, EJS, Bootstrap 5]
+  status: active
+  github: "#"
+  demo: "#"
+  icon: "bi-journal-code"
+  icon_bg: "#dbeafe"
+  icon_color: "#1d4ed8"
+
+- title: Task Manager API
+  description: A RESTful API for managing tasks and projects. Built with Node.js and PostgreSQL, featuring JWT authentication, role-based access control, and full CRUD operations.
+  tech: [Node.js, Express, PostgreSQL, JWT]
+  status: active
+  github: "#"
+  demo: "#"
+  icon: "bi-check2-square"
+  icon_bg: "#d1fae5"
+  icon_color: "#065f46"
+
+- title: Weather Dashboard
+  description: A real-time weather dashboard that aggregates data from multiple APIs. Displays current conditions, 7-day forecasts, and historical trends with interactive charts.
+  tech: [JavaScript, Chart.js, OpenWeather API, CSS Grid]
+  status: active
+  github: "#"
+  demo: "#"
+  icon: "bi-cloud-sun"
+  icon_bg: "#fef3c7"
+  icon_color: "#92400e"
+
+- title: E-Commerce Store
+  description: A full-stack e-commerce application with product listings, shopping cart, Stripe payment integration, and an admin dashboard for inventory management.
+  tech: [React, Node.js, MongoDB, Stripe]
+  status: in-progress
+  github: "#"
+  demo: "#"
+  icon: "bi-bag"
+  icon_bg: "#fce7f3"
+  icon_color: "#9d174d"
+
+- title: CLI Dev Toolkit
+  description: A collection of command-line utilities for automating common development tasks — project scaffolding, git hooks, code formatting, and deployment scripts.
+  tech: [Node.js, Commander.js, Bash]
+  status: active
+  github: "#"
+  demo: null
+  icon: "bi-terminal"
+  icon_bg: "#f3f4f6"
+  icon_color: "#374151"
+
+- title: Data Visualization Library
+  description: A lightweight charting library built on SVG. Supports bar charts, line charts, pie charts, and scatter plots with smooth animations and responsive design.
+  tech: [TypeScript, SVG, D3.js]
+  status: archived
+  github: "#"
+  demo: "#"
+  icon: "bi-bar-chart-line"
+  icon_bg: "#ede9fe"
+  icon_color: "#5b21b6"

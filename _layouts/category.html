@@ -1,0 +1,60 @@
+---
+layout: default
+---
+{% assign cat = page.title | downcase %}
+{% assign cat_meta = site.category_meta[cat] %}
+
+<div class="container py-5">
+  <div class="row g-5">
+    <div class="col-lg-8">
+      <div class="category-header mb-5">
+        <span class="category-badge d-inline-block mb-3"
+              style="background-color:{{ cat_meta.color }};color:{{ cat_meta.text_color }};">
+          {{ cat_meta.label | default: page.title }}
+        </span>
+        <h1 class="fw-bold">{{ cat_meta.label | default: page.title }}</h1>
+        <p class="text-muted">{{ page.posts | size }} post{% if page.posts.size != 1 %}s{% endif %}</p>
+      </div>
+
+      {% if page.posts.size > 0 %}
+        <div class="post-list">
+          {% for post in page.posts %}
+            <article class="post-card mb-4">
+              <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                  <a href="{{ '/category/' | append: post.categories[0] | relative_url }}"
+                     class="category-badge mb-2 d-inline-block"
+                     style="background-color:{{ cat_meta.color }};color:{{ cat_meta.text_color }};">
+                    {{ cat_meta.label | default: post.categories[0] }}
+                  </a>
+                  <h2 class="card-title h5 fw-bold">
+                    <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark stretched-link">
+                      {{ post.title }}
+                    </a>
+                  </h2>
+                  <p class="card-text text-muted small mb-3">{{ post.excerpt | strip_html | truncate: 140 }}</p>
+                  <div class="text-muted small">
+                    <i class="bi bi-calendar3"></i>
+                    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+                  </div>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted">No posts in this category yet.</p>
+      {% endif %}
+
+      <div class="mt-4">
+        <a href="{{ '/' | relative_url }}" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-arrow-left"></i> All Posts
+        </a>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      {% include sidebar.html %}
+    </div>
+  </div>
+</div>

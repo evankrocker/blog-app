@@ -1,0 +1,54 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="{{ '/' | relative_url }}">
+        {{ site.title }}
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarMain" aria-controls="navbarMain"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% if page.url == '/' %}active{% endif %}"
+               href="{{ '/' | relative_url }}">Blog</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {% if page.layout == 'category' %}active{% endif %}"
+               href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              {% for cat in site.categories %}
+                {% assign cat_key = cat[0] %}
+                {% assign cat_meta = site.category_meta[cat_key] %}
+                <li>
+                  <a class="dropdown-item" href="{{ '/category/' | append: cat_key | relative_url }}">
+                    <span class="category-dot"
+                          style="background-color:{{ cat_meta.color }};"></span>
+                    {{ cat_meta.label | default: cat_key }}
+                    <span class="badge bg-secondary ms-1">{{ cat[1].size }}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link {% if page.url contains '/projects' %}active{% endif %}"
+               href="{{ '/projects' | relative_url }}">Projects</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link {% if page.url contains '/about' %}active{% endif %}"
+               href="{{ '/about' | relative_url }}">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

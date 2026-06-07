@@ -1,0 +1,47 @@
+<aside class="sidebar">
+  <!-- Categories -->
+  <div class="sidebar-widget mb-4">
+    <h5 class="sidebar-title">Categories</h5>
+    <ul class="list-unstyled">
+      {% for cat in site.categories %}
+        {% assign cat_key = cat[0] %}
+        {% assign cat_meta = site.category_meta[cat_key] %}
+        <li class="mb-2">
+          <a href="{{ '/category/' | append: cat_key | relative_url }}"
+             class="d-flex align-items-center justify-content-between text-decoration-none sidebar-cat-link">
+            <span class="d-flex align-items-center gap-2">
+              <span class="category-dot" style="background-color:{{ cat_meta.color }};"></span>
+              {{ cat_meta.label | default: cat_key }}
+            </span>
+            <span class="badge bg-light text-dark border">{{ cat[1].size }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Recent Posts -->
+  <div class="sidebar-widget">
+    <h5 class="sidebar-title">Recent Posts</h5>
+    <ul class="list-unstyled">
+      {% assign recent = site.posts | limit: 5 %}
+      {% for post in recent %}
+        {% assign pk = post.categories[0] %}
+        {% assign pm = site.category_meta[pk] %}
+        <li class="mb-3">
+          <a href="{{ post.url | relative_url }}"
+             class="text-decoration-none text-dark sidebar-post-link">
+            <div class="small fw-semibold lh-sm mb-1">{{ post.title }}</div>
+          </a>
+          <div class="d-flex align-items-center gap-2">
+            <span class="category-badge-sm d-inline-block"
+                  style="background-color:{{ pm.color }};color:{{ pm.text_color }};">
+              {{ pm.label | default: pk }}
+            </span>
+            <time class="text-muted" style="font-size:0.75rem;">{{ post.date | date: "%b %-d, %Y" }}</time>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</aside>
